@@ -1,0 +1,19 @@
+{
+  "name": "apirest_expressjs",
+  "version": "1.0.0",
+  "description": "ApiRest_expressjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Codeur16/ApiRest_expressjs.git"
+  },
+  "author": "loico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Codeur16/ApiRest_expressjs/issues"
+  },
+  "homepage": "https://github.com/Codeur16/ApiRest_expressjs#readme"
+}
