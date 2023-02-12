@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Codeur16/ApiRest_expressjs/issues"
   },
-  "homepage": "https://github.com/Codeur16/ApiRest_expressjs#readme"
+  "homepage": "https://github.com/Codeur16/ApiRest_expressjs#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
