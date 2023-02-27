@@ -7,13 +7,22 @@ module.exports = (app)=>{
             where:{id:id}
         })
         .then(()=>{
-            USER.findByPk(id)
+            return USER.findByPk(id)
             .then((users)=>{
+                if(users===null){
+                    const message= "Le user demende m'existe pas";
+                    return res.status(404).json({message});
+
+                }
+
                 const message="User"+users.name+" updated successfully";
                 res.status(200).json({message, data:users});
             })
 
         })
+        .catch(err =>{
+            res.status(500).json({message: "Erreur lors de la modification! Reessayer plus tard",err})
+          })
     })
 
 }

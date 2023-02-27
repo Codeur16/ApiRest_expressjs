@@ -25,6 +25,12 @@ require("./src/routes/findOneUser")(app);
 require("./src/routes/createUser")(app);
 require("./src/routes/updateUser")(app);
 require("./src/routes/deleteUser")(app);
+// Ajoute le gestion d'erreur 404
+app.use(({res})=> {
+    const message = "Impossible de trouver la ressource! vous pouvez essayer un autre URL"
+    res.status(404).json(message);
+});
+
 
 app.listen(port, () => {console.log('listening on port'+port+'lien du serveur http://localhost:'+port)});        
  
