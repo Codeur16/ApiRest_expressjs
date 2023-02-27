@@ -1,22 +1,24 @@
 {
-  "name": "apirest_expressjs",
-  "version": "1.0.0",
-  "description": "ApiRest_expressjs",
-  "main": "index.js",
+  "name": "apirest-expressjs",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "node index.js"
+    "test": "node ./bin/www",
+    "start": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Codeur16/ApiRest_expressjs.git"
-  },
-  "author": "loico",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Codeur16/ApiRest_expressjs/issues"
-  },
-  "homepage": "https://github.com/Codeur16/ApiRest_expressjs#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.20.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "mariadb": "^3.1.0",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.29.0",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
   }
 }
