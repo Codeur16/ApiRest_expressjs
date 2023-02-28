@@ -20,9 +20,9 @@ app
     .use(bodyParser.json());
 //sequelize.initDB();
 // POINT DE TERMINAISON
-// app.get('/',(req, res)=>{
-//     res.send('Hello Hiruko');
-// })
+app.get('/',(req, res)=>{
+    res.send('Hello Hiruko');
+})
 
 require("./src/routes/findAllUser")(app);
 require("./src/routes/findOneUser")(app);
