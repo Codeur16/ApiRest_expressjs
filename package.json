@@ -6,6 +6,9 @@
     "start": "NODE_ENV=production node app.js",
     "dev": " nodemon app.js"
   },
+  "engines": {
+    "node": "16.17.1"
+  },
   "dependencies": {
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
