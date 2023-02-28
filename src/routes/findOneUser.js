@@ -1,7 +1,10 @@
 const {USER} = require ("../db/sequelize")
 
+const auth = require('../middleware/auth'); 
+
+
 module.exports = (app)=>{
-  app.get("/api/user/:id", (req ,res)=>{
+  app.get("/api/user/:id",auth, (req ,res)=>{
     USER.findByPk(req.params.id)
         .then(users =>{
         const message ="Le user nommé  "+users.name+" a bien été recuperer!"

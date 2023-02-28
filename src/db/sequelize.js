@@ -1,5 +1,9 @@
-const {Sequelize, DataTypes} =require('sequelize')
-const userModel = require("../models/userModel")
+const {Sequelize, DataTypes} =require('sequelize');
+const bcrypt = require('bcrypt');
+
+
+const userModel = require("../models/userModel");
+const clientModel = require("../models/clientModel");
 
 // instance sequelize
 
@@ -14,7 +18,25 @@ const sequelize = new Sequelize('test', 'root', '', {
 
     
 const USER= userModel(sequelize, DataTypes);
+const client= clientModel(sequelize, DataTypes);
+async function initDB(){
+    await sequelize.sync({force: true})
+    .then(_=>{
+     bcrypt.hash('12345678', 1)
+     .then(hash=>{
+            client.create({
+                name: 'test',
+                email: 'test@test.com',
+                role: 'user',
+                password: hash
+            })
+            .then(test=>
+                console.log(test.toJSON())
+            );
+})
 
+})
+}
 // function initDB(){
 //     return sequelize.sync({force: true})
 //     .then(() => {
@@ -49,4 +71,4 @@ const USER= userModel(sequelize, DataTypes);
 
 
 
-    module.exports = { USER};
+    module.exports = { USER, client, initDB };

@@ -7,16 +7,30 @@ const users =(sequelize, DataTypes)=>{
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull:false,
+            validate:{
+                notEmpty:{ msg:"Name can't be empty" }
+
+            }
         },
         email: {
             type: DataTypes.STRING,
             unique: false,
-            allowNull: true
+            allowNull: true,
+            validate:{
+                notEmpty:{ msg:"Email can't be empty" }
+
+            }
+        
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: false,
+            validate:{
+                notEmpty:{ msg:"Password can't be empty" }
+
+            }
+        
         }
         },
         {
