@@ -20,6 +20,7 @@ app
     .use(bodyParser.json());
 //sequelize.initDB();
 // POINT DE TERMINAISON
+
 app.get('/',(req, res)=>{
     res.send('Hello Hiruko');
 })
