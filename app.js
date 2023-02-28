@@ -18,7 +18,8 @@ app
     .use(favicon(__dirname + "/favicon.ico"))
     // .use(morgan('dev'))
     .use(bodyParser.json());
-//sequelize.initDB();
+sequelize.initDB();
+sequelize.initclient();
 // POINT DE TERMINAISON
 
 app.get('/',(req, res)=>{

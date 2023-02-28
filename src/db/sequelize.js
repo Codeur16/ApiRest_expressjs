@@ -31,15 +31,34 @@ sequelize = new Sequelize('test', 'root', '', {
 }
 const USER= userModel(sequelize, DataTypes);
 const client= clientModel(sequelize, DataTypes);
+
+async function initclient(){
+  
+  return sequelize.sync({alter: true})
+  .then(_=>{
+   bcrypt.hash('12345678', 1)
+   .then(hash=>{
+          client.create({
+              name: 'test',
+              email: 'test@test.com',
+              role: 'user',
+              password: hash
+          })
+          .then(test=>
+              console.log(test.toJSON())
+          );
+})
+
+})
+}
 async function initDB(){
-    await sequelize.sync({force: true})
+  return sequelize.sync({alter: true})
     .then(_=>{
      bcrypt.hash('12345678', 1)
      .then(hash=>{
-            client.create({
+            USER.create({
                 name: 'test',
                 email: 'test@test.com',
-                role: 'user',
                 password: hash
             })
             .then(test=>
@@ -48,6 +67,8 @@ async function initDB(){
 })
 
 })
+
+
 }
 // function initDB(){
 //     return sequelize.sync({force: true})
@@ -83,4 +104,4 @@ async function initDB(){
 
 
 
-    module.exports = { USER, client, initDB };
+    module.exports = { USER, client, initDB, initclient };
