@@ -8,7 +8,7 @@ const clientModel = require("../models/clientModel");
 // instance sequelize
 let sequelize;
 if (process.env.NODE_EN===  'production') {
-  sequelize = new Sequelize('fmjzknms6lf6acih','fmjzknms6lf6acih','mpe1lmb1jci8jwzx',{
+  sequelize = new Sequelize('	q3km6gfiypm99yap','fmjzknms6lf6acih','mpe1lmb1jci8jwzx',{
     host:'ao9moanwus0rjiex.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     dialect:'mariadb',
     dialectOptions:{
