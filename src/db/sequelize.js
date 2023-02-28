@@ -6,8 +6,20 @@ const userModel = require("../models/userModel");
 const clientModel = require("../models/clientModel");
 
 // instance sequelize
+let sequelize;
+if (process.env.NODE_EN===  'production') {
+  sequelize = new Sequelize('fmjzknms6lf6acih','fmjzknms6lf6acih','mpe1lmb1jci8jwzx',{
+    host:'ao9moanwus0rjiex.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    dialect:'mariadb',
+    dialectOptions:{
+      timezone:'Etc/GMT-1'
+    },
+    logging:true
+  })
+}else{
+   
 
-const sequelize = new Sequelize('test', 'root', '', {
+sequelize = new Sequelize('test', 'root', '', {
     host: 'localhost',
     dialect: 'mariadb',
     dialectOptions: {
@@ -16,7 +28,7 @@ const sequelize = new Sequelize('test', 'root', '', {
     logging: false
   })
 
-    
+}
 const USER= userModel(sequelize, DataTypes);
 const client= clientModel(sequelize, DataTypes);
 async function initDB(){
