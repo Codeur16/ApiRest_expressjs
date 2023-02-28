@@ -20,10 +20,11 @@ app
     .use(bodyParser.json());
 //sequelize.initDB();
 // POINT DE TERMINAISON
-app.get('/',all,(req, res)=>{
+app.get('/',(req, res)=>{
     res.send('Hello Hiruko');
 })
-const all =require("./src/routes/findAllUser")(app);
+
+require("./src/routes/findAllUser")(app);
 require("./src/routes/findOneUser")(app);
 require("./src/routes/createUser")(app);
 require("./src/routes/updateUser")(app);
