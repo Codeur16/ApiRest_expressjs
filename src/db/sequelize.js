@@ -34,7 +34,7 @@ const client= clientModel(sequelize, DataTypes);
 
 async function initclient(){
   
-  return sequelize.sync({alter: true})
+  return sequelize.sync()
   .then(_=>{
    bcrypt.hash('12345678', 1)
    .then(hash=>{
@@ -52,7 +52,7 @@ async function initclient(){
 })
 }
 async function initDB(){
-  return sequelize.sync({alter: true})
+  return sequelize.sync()
     .then(_=>{
      bcrypt.hash('12345678', 1)
      .then(hash=>{
