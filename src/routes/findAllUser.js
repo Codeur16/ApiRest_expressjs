@@ -3,7 +3,7 @@ const {Op} = require('sequelize');
 const auth = require('../middleware/auth'); 
 
 module.exports = (app)=>{
-  app.get("/", (req ,res)=>{
+  app.get("/api/user/all/", auth, (req ,res)=>{
     if(req.query.name){
       const name = req.query.name;
       if(name.length < 2){
