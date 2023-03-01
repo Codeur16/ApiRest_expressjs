@@ -1,7 +1,7 @@
 const express = require('express');
-// const morgan = require('morgan');
 const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 
 const sequelize = require('./src/db/sequelize');
@@ -16,7 +16,8 @@ app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.json());
 app
     .use(favicon(__dirname + "/favicon.ico"))
-    // .use(morgan('dev'))
+    .use(cors())
+
     .use(bodyParser.json());
 // sequelize.initDB();
 // sequelize.initclient();
@@ -34,6 +35,7 @@ require("./src/routes/deleteUser")(app);
 require("./src/routes/login")(app);
 
 // Ajoute le gestion d'erreur 404
+
 app.use(({res})=> {
     const message = "Impossible de trouver la ressource! vous pouvez essayer un autre URL"
     res.status(404).json(message);
