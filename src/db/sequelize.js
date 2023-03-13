@@ -1,11 +1,14 @@
 const {Sequelize, DataTypes} =require('sequelize');
 const bcrypt = require('bcrypt');
 
+// importation des models
 
+const studentModel = require("../models/studentModel");
 const userModel = require("../models/userModel");
-const clientModel = require("../models/clientModel");
+const payModel = require("../models/payModel");
+const schoolModel = require("../models/schoolModel");
 
-// instance sequelize
+// configuration de la base de donnees 
 let sequelize;
 if (process.env.NODE_ENV ===  'production') {
   sequelize = new Sequelize('q3km6gfiypm99yap','fmjzknms6lf6acih','mpe1lmb1jci8jwzx',{
@@ -18,69 +21,114 @@ if (process.env.NODE_ENV ===  'production') {
   })
 }else{
    
-
-sequelize = new Sequelize('test', 'root', '', {
+// connection a la db en local
+sequelize = new Sequelize('app', 'root', '', {
     host: 'localhost',
     dialect: 'mariadb',
     dialectOptions: {
       timezone: 'Etc/GMT-1',
     },
-    logging: false
+    logging: false,
+    define:{
+      maxKeys: 200
+    }
   })
 
 }
-const USER= userModel(sequelize, DataTypes);
-const client= clientModel(sequelize, DataTypes);
 
-async function initclient(){
-  
-  return sequelize.sync()
-  .then(_=>{
-   bcrypt.hash('12345678', 1)
-   .then(hash=>{
-          client.create({
-              name: 'test',
-              email: 'test@test.com',
-              role: 'user',
-              password: hash
-          })
-          .then(test=>
-              console.log(test.toJSON())
-          );
-})
-
-})
-}
-async function initDB(){
-  return sequelize.sync()
-    .then(_=>{
-     bcrypt.hash('12345678', 1)
-     .then(hash=>{
-            USER.create({
-                name: 'test',
-                email: 'test@test.com',
-                password: hash
-            })
-            .then(test=>
-                console.log(test.toJSON())
-            );
-})
-
-})
+// creation des models
+const studentTable= studentModel(sequelize, DataTypes);
+const userTable= userModel(sequelize, DataTypes);
+const payTable= payModel(sequelize, DataTypes);
+const schoolTable= schoolModel(sequelize, DataTypes);
 
 
-}
+//association de la baase de donnees
+
+ function initDB(){
+  console.log("initialisation des tables de la base de donnees");
+  return sequelize.sync({alter:true}) 
+
+    // .then(_=>{
+    //   bcrypt.hash('12345678', 1)
+    //         .then(hash=>{
+      
+    //     schoolTable.create({
+    //         name: "nkoaban",
+    //         adresse:"yaounde"
+    //     }) 
+        
+    //     userTable.create({
+    //         name: 'loico',
+    //         email: 'loioico@gmail.com',
+    //         password: hash,
+    //         role:'admin'
+    //     })
+        
+    //     payTable.create({
+    //         amount: 100000,
+    //         status:"tranche2",
+    //         userId:1,
+    //         studentId:1
+
+    //     })
+
+        
+    //     studentTable.create({
+    //         name: 'jean',
+    //         class: 'terminaleC',
+    //         school:"lycee bilingue ekounou",
+    //         sex:"m",
+    //         birthday:new Date(1998, 6, 20),
+    //         birth_place:"doual",
+    //         phone:"123456787",
+    //         school_situation:"ancien",
+    //         class_situation:"ancien",
+    //         schoolId:1,
+
+    //     })
+    //   })
+    //   })
+
+ }
+
+module.exports = { studentTable, userTable, initDB,payTable, schoolTable};
+
+
+
+
+// async function initDB(){
+//   return sequelize.sync()
+//     .then(_=>{
+//      bcrypt.hash('12345678', 1)
+//      .then(hash=>{
+//             studentTable.create({
+//                 name: 'test',
+//                 email: 'test@test.com',
+//                 password: hash
+//             })
+//             .then(test=>
+//                 console.log(test.toJSON())
+//             );
+// })
+
+// })
+
+
+// }
+
+
 // function initDB(){
 //     return sequelize.sync({force: true})
 //     .then(() => {
 //         console.log('Database has been synced!');
 
-//         users.map( User => {
-//             USER.create({
+//         students.map( student => {
+//             student.create({
             
-//             name: User.name,
-//             email: User.email,
-//             password: User.password,
+//             name: student.name,
+//             email: student.email,
+//             password: student.password,
 
 
 
@@ -104,4 +152,4 @@ async function initDB(){
 
 
 
-    module.exports = { USER, client, initDB, initclient };
+   
